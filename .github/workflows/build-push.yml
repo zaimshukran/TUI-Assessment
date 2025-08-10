@@ -27,4 +27,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/zaimshukran/tui-assessment:latest
+          tags: ghcr.io/${{ github.repository }}:latest
