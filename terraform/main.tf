@@ -41,7 +41,7 @@ resource "aws_security_group" "allow_ssh" {
 }
 
 resource "aws_instance" "ubuntu" {
-  ami                    = "ami-0c5199d385b432989"  # Ubuntu 22.04 in ap-southeast-1 (Malaysia)
+  ami                    = "ami-02b9fe2e542eec967"
   instance_type          = "t2.micro"
   subnet_id              = aws_subnet.main_subnet.id
   vpc_security_group_ids = [aws_security_group.allow_ssh.id]
