@@ -5,6 +5,7 @@ on:
     workflows: ["Docker Build and Push"]  # run after Docker image is built & pushed
     types:
       - completed
+  workflow_dispatch:
 
 jobs:
   deploy:
