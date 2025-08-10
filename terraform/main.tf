@@ -71,8 +71,22 @@ resource "aws_instance" "ubuntu" {
   instance_type               = "t2.micro"
   subnet_id                   = aws_subnet.main_subnet.id
   vpc_security_group_ids      = [aws_security_group.allow_ssh.id]
-  key_name                   = var.key_name
+  key_name                    = var.key_name
   associate_public_ip_address = true
+
+  user_data = <<-EOF
+              #!/bin/bash
+              yum update -y
+              amazon-linux-extras install docker -y
+              service docker start
+              usermod -a -G docker ec2-user
+
+              # Docker login (replace <username> and <token> securely)
+              echo "<token>" | docker login ghcr.io -u <username> --password-stdin
+
+              docker pull ghcr.io/zaimshukran/tui-assessment:latest
+              docker run -d --name myapp -p 80:8080 ghcr.io/zaimshukran/tui-assessment:latest
+              EOF
 
   tags = {
     Name = "ubuntu-instance"
