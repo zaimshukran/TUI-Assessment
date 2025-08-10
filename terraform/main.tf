@@ -80,12 +80,6 @@ resource "aws_instance" "ubuntu" {
               amazon-linux-extras install docker -y
               service docker start
               usermod -a -G docker ec2-user
-
-              # Docker login (replace <username> and <token> securely)
-              echo "<token>" | docker login ghcr.io -u <username> --password-stdin
-
-              docker pull ghcr.io/zaimshukran/tui-assessment:latest
-              docker run -d --name myapp -p 80:8080 ghcr.io/zaimshukran/tui-assessment:latest
               EOF
 
   tags = {
