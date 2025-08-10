@@ -9,5 +9,5 @@ terraform {
 }
 
 provider "aws" {
-  region = "ap-southeast-1"  # Malaysia
+  region = "ap-southeast-5"  # Malaysia
 }
