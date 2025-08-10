@@ -9,7 +9,7 @@ resource "aws_vpc" "main" {
 resource "aws_subnet" "main_subnet" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = "10.0.1.0/24"
-  availability_zone = "ap-southeast-5"
+  availability_zone = "ap-southeast-1"
 
   tags = {
     Name = "main-subnet"
@@ -41,7 +41,7 @@ resource "aws_security_group" "allow_ssh" {
 }
 
 resource "aws_instance" "ubuntu" {
-  ami                    = "ami-02b9fe2e542eec967"
+  ami                    = "ami-02c7683e4ca3ebf58"
   instance_type          = "t2.micro"
   subnet_id              = aws_subnet.main_subnet.id
   vpc_security_group_ids = [aws_security_group.allow_ssh.id]
