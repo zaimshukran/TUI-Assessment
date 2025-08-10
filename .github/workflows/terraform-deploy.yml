@@ -1,0 +1,24 @@
+name: Terraform Apply
+
+on:
+  workflow_dispatch:
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform Init
+        working-directory: ./terraform
+        run: terraform init
+
+      - name: Terraform Apply
+        working-directory: ./terraform
+        env:
+          TF_VAR_key_name: ${{ secrets.EC2_KEY_NAME }}
+          TF_VAR_my_ip: ${{ secrets.MY_PUBLIC_IP }}
+        run: terraform apply -auto-approve
