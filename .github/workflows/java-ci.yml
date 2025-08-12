@@ -39,3 +39,15 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=zaimshukran_TUI-Assessment
+
+      - name: Upload analysis reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: maven-reports
+          path: |
+            **/target/site/**
+            **/target/spotbugs.html
+            **/target/checkstyle-result.xml
+            **/target/jacoco/**
+            **/target/dependency-check-report.html
+          retention-days: 7
