@@ -32,6 +32,9 @@ jobs:
       - name: Run OWASP Dependency Check
         run: mvn org.owasp:dependency-check-maven:check -Dnvd.api.key=${{ secrets.NVD_API_KEY }} -Ddependency-check.failBuildOnCVSS=7
 
+      - name: Run SpotBugs
+        run: mvn com.github.spotbugs:spotbugs-maven-plugin:4.8.3.0:check -Dspotbugs.html.output=true
+
       - name: Run Tests with Coverage
         run: mvn clean verify
 
@@ -47,6 +50,7 @@ jobs:
           path: |
             **/target/site/**
             **/target/spotbugs.html
+            **/target/spotbugsXml.xml
             **/target/checkstyle-result.xml
             **/target/jacoco/**
             **/target/dependency-check-report.html
